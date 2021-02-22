@@ -1,0 +1,46 @@
+ALGORITHM algo2_sol1
+VAR
+    tab1 : ARRAY_OF INTEGER [20];
+    tab2 : ARRAY_OF INTEGER [20];
+    i , j , sum : INTEGER;
+    found : BOOLEAN;
+BEGIN
+        // remplissage du tableau 1.
+    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+        Read (tab1[i]);
+    END_FOR
+
+        // remplissage du tableau 2.
+    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+        Read (tab2[j]);
+    END_FOR
+
+        // recherche des éléments commun % tab 1 et tab 2 et faire la somme.
+    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+        found := FALSE;
+        FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+            IF (tab1[i] = tab2[j]) THEN
+                found := TRUE ;
+            END_IF
+        END_FOR
+        IF (found = TRUE) THEN
+            sum := sum + tab1[i]
+        END_IF
+    END_FOR
+
+    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+        found := FALSE;
+        FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+            IF (tab2[j] = tab1[i]) THEN
+                found := TRUE ;
+            END_IF
+        END_FOR
+        IF (found = TRUE) THEN
+            sum := sum + tab2[j]
+        END_IF
+    END_FOR
+
+        // affichage de la somme.
+    Write ("The sum of all common elements = " , sum);
+
+END

@@ -1,0 +1,59 @@
+ALGORITHM algo1_sol2
+VAR
+    tab1 : ARRAY_OF INTEGER [20];
+    tab2 : ARRAY_OF INTEGER [20];
+    htab : HASH_TABLE<INTEGER,INTEGER>;
+    i , j , count , sum : INTEGER;
+    
+BEGIN
+    sum := 0 ;      // initialisation de la valeur de la somme.
+
+        // remplissage du tableau 1.
+    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+        Read (tab1[i]);
+    END_FOR
+
+        // remplissage du tableau 2.
+    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+        Read (tab2[j]);
+    END_FOR
+
+
+        // remplissage du hash table par les éléments dupliqués et distincts.
+    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+        count := 1;
+        FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+            IF (tab1[i] = tab2[j]) THEN
+                count += 1;
+            END_IF
+        END_FOR
+        htab.insert(tab1[i],count);
+    END_FOR
+    
+    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+        count := 1;
+        FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+            IF (tab2[j] = tab1[i]) THEN
+                count += 1;
+            END_IF
+        END_FOR
+        htab.insert(tab2[j],count);
+    END_FOR
+
+        // recherche des éléments non dupliqués (distincts) et faire leur somme.
+    FOR i FROM 0 TO tab1.length -1 STEP 1  DO
+        IF (htab.get(tab1[i]) = 1) THEN
+            sum += tab1[i];
+        END_IF
+    END_FOR
+
+    FOR j FROM 0 TO tab2.length -1 STEP 1  DO
+        IF (htab.get(tab2[j]) = 1) THEN
+            sum += tab2[j];
+        END_IF
+    END_FOR
+
+        // affichage de la somme.
+    Write ("The sum of all distinct elements = " , sum);
+
+END
